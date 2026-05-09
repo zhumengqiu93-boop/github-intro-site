@@ -34,7 +34,7 @@ function StackedWords() {
             key={role}
             className="leading-[1.05] font-black tracking-tight cursor-default transition-all duration-700"
             style={{
-              fontSize: 'clamp(36px, 5.5vw, 80px)',
+              fontSize: 'clamp(28px, 7vw, 80px)',
               color: isActive ? '#fff' : 'transparent',
               WebkitTextStroke: isActive ? '0' : '1px rgba(255,255,255,0.13)',
               opacity: isActive ? 1 : 0.55,
@@ -107,8 +107,8 @@ export default function AboutSection() {
       <div className="absolute inset-0 pointer-events-none"
            style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-8 md:px-16 py-28 md:py-36">
-        <div className="grid md:grid-cols-[1fr_1fr] gap-16 xl:gap-24 items-center">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-16 py-14 md:py-36">
+        <div className="grid md:grid-cols-[1fr_1fr] gap-10 md:gap-16 xl:gap-24 items-center">
 
           {/* ── LEFT COLUMN ── */}
           <div>
@@ -178,7 +178,7 @@ export default function AboutSection() {
             <div className="rounded-[28px] border border-[#1E1E1E] bg-[#0E0E0E] overflow-hidden">
 
               {/* Panel header bar */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-[#181818]">
+              <div className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4 border-b border-[#181818]">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
@@ -191,22 +191,22 @@ export default function AboutSection() {
               </div>
 
               {/* Avatar + name row */}
-              <div className="px-6 py-6 border-b border-[#141414]">
-                <div className="flex items-center gap-4">
+              <div className="px-4 md:px-6 py-4 md:py-6 border-b border-[#141414]">
+                <div className="flex items-center gap-3">
                   {/* Avatar circle */}
                   <div className="relative flex-shrink-0">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#D4F542]/20 to-[#4ECFFF]/20
-                                    border border-[#D4F542]/20 flex items-center justify-center text-2xl">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-[#D4F542]/20 to-[#4ECFFF]/20
+                                    border border-[#D4F542]/20 flex items-center justify-center text-xl md:text-2xl">
                       🎨
                     </div>
-                    <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#D4F542] border-2 border-[#0E0E0E]" />
+                    <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#D4F542] border-2 border-[#0E0E0E]" />
                   </div>
-                  <div>
-                    <div className="font-black text-white text-base">@design_creator</div>
-                    <div className="text-[#444] text-xs mt-0.5 font-mono">UI/UX Designer · 10年+ exp</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="font-black text-white text-sm md:text-base truncate">@design_creator</div>
+                    <div className="text-[#444] text-xs mt-0.5 font-mono truncate">UI/UX · 10年+ exp</div>
                   </div>
-                  <div className="ml-auto px-3 py-1 rounded-full bg-[#D4F542]/10 border border-[#D4F542]/20
-                                  text-[#D4F542] text-xs font-bold">
+                  <div className="flex-shrink-0 px-2.5 py-1 rounded-full bg-[#D4F542]/10 border border-[#D4F542]/20
+                                  text-[#D4F542] text-xs font-bold whitespace-nowrap">
                     Available
                   </div>
                 </div>
@@ -217,7 +217,7 @@ export default function AboutSection() {
                 {STATS.map((s, i) => (
                   <div
                     key={s.label}
-                    className={`px-6 py-5 group cursor-default hover:bg-[#141414] transition-colors duration-200
+                    className={`px-4 md:px-6 py-4 md:py-5 group cursor-default hover:bg-[#141414] transition-colors duration-200
                                 ${i % 2 === 0 && i < STATS.length - 1 ? 'border-r border-[#141414]' : ''}
                                 ${i < 2 ? 'border-b border-[#141414]' : ''}`}
                   >
@@ -231,7 +231,7 @@ export default function AboutSection() {
               </div>
 
               {/* Activity chart */}
-              <div className="px-6 py-5 border-b border-[#141414]">
+              <div className="px-4 md:px-6 py-4 md:py-5 border-b border-[#141414]">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-[11px] text-[#444] font-mono uppercase tracking-widest">Monthly Output</span>
                   <span className="text-[11px] text-[#D4F542] font-bold">↑ 12%</span>
@@ -240,7 +240,7 @@ export default function AboutSection() {
               </div>
 
               {/* Recent tag row */}
-              <div className="px-6 py-5">
+              <div className="px-4 md:px-6 py-4 md:py-5">
                 <div className="text-[11px] text-[#333] font-mono uppercase tracking-widest mb-3">Recent Work</div>
                 <div className="flex flex-wrap gap-2">
                   {['UI Kit Pro', 'Figma Templates', 'Design System', 'Icon Pack'].map(tag => (

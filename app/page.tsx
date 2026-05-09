@@ -32,18 +32,18 @@ export default function Home() {
   const featured = products.slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-[#0A0A0A] overflow-x-hidden">
 
       {/* ══════════════════════════════════════════
           NAV
       ══════════════════════════════════════════ */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between
-                      px-8 py-4 border-b border-[#1A1A1A] bg-[#0A0A0A]/90 backdrop-blur-md">
-        <Link href="/" className="flex items-baseline gap-1 group">
-          <span className="text-lg font-black tracking-tight">数字资料站</span>
-          <span className="text-[#D4F542] text-lg font-black inline-block
+                      px-4 md:px-8 py-3 md:py-4 border-b border-[#1A1A1A] bg-[#0A0A0A]/90 backdrop-blur-md">
+        <Link href="/" className="flex items-baseline gap-1 group whitespace-nowrap">
+          <span className="text-base md:text-lg font-black tracking-tight">数字资料站</span>
+          <span className="text-[#D4F542] text-base md:text-lg font-black inline-block
                            group-hover:rotate-12 transition-transform duration-300">。</span>
-          <span className="text-[10px] text-[#444] uppercase tracking-[0.2em] ml-2 font-medium">
+          <span className="hidden md:inline text-[10px] text-[#444] uppercase tracking-[0.2em] ml-2 font-medium">
             Design Resources
           </span>
         </Link>
@@ -54,13 +54,13 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <span className="hidden md:flex items-center gap-1.5 text-[10px] text-[#555]
                            uppercase tracking-[0.18em] font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D4F542] animate-pulse" />
             Available Now
           </span>
-          <MagneticButton href="#products" className="btn-accent px-5 py-2 text-sm">
+          <MagneticButton href="#products" className="btn-accent px-3 py-1.5 text-xs md:px-5 md:py-2 md:text-sm">
             浏览全部
           </MagneticButton>
         </div>
@@ -88,11 +88,11 @@ export default function Home() {
         </div>
 
         {/* ── TOP META ROW ── */}
-        <div className="relative z-10 flex items-center justify-between px-10 pt-8">
+        <div className="relative z-10 flex items-center justify-between px-5 md:px-10 pt-6 md:pt-8">
           <RevealSection variant="left" delay={0}>
             <EnTag>Design Resources — Vol.01 / 2025</EnTag>
           </RevealSection>
-          <RevealSection variant="left" delay={100}>
+          <RevealSection variant="left" delay={100} className="hidden md:block">
             <div className="flex items-center gap-6 text-[10px] text-[#555]
                             uppercase tracking-[0.2em] font-medium">
               <span>UI Kit</span>
@@ -107,27 +107,27 @@ export default function Home() {
         </div>
 
         {/* ── MAIN CONTENT ── */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center px-10 py-12">
-          <div className="max-w-7xl mx-auto w-full grid md:grid-cols-[1fr_auto] gap-12 items-end">
+        <div className="relative z-10 flex-1 flex flex-col justify-center px-5 md:px-10 py-8 md:py-12">
+          <div className="max-w-7xl mx-auto w-full grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-end">
 
             {/* Left: headline block */}
             <div>
               {/* Eyebrow */}
               <RevealSection variant="left" delay={80}>
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-5 md:mb-6">
                   <div className="h-px w-8 bg-[#333]" />
-                  <span className="text-[11px] text-[#555] uppercase tracking-[0.28em] font-medium">
+                  <span className="text-[10px] md:text-[11px] text-[#555] uppercase tracking-[0.28em] font-medium">
                     Curated for Creative Professionals
                   </span>
                 </div>
               </RevealSection>
 
               {/* Mega headline */}
-              <h1 className="font-black leading-[0.88] tracking-[-0.03em] mb-10">
-                <div className="text-[clamp(64px,9.5vw,144px)] text-white">
+              <h1 className="font-black leading-[0.88] tracking-[-0.03em] mb-8 md:mb-10">
+                <div className="text-[clamp(48px,9.5vw,144px)] text-white">
                   <SplitText delay={120} stagger={55}>精选数字</SplitText>
                 </div>
-                <div className="text-[clamp(64px,9.5vw,144px)] text-[#D4F542]"
+                <div className="text-[clamp(48px,9.5vw,144px)] text-[#D4F542]"
                      style={{ WebkitTextStroke: '2px #D4F542' }}>
                   <SplitText delay={420} stagger={55}>资料商店</SplitText>
                 </div>
@@ -157,8 +157,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: stats + rotating badge */}
-            <RevealSection delay={600} variant="scale" className="flex flex-col items-end gap-6">
+            {/* Right: stats + rotating badge — desktop only */}
+            <RevealSection delay={600} variant="scale" className="hidden md:flex flex-col items-end gap-6">
               {/* Rotating circle badge */}
               <div className="relative w-24 h-24">
                 <svg viewBox="0 0 96 96" className="w-full h-full spin-badge">
@@ -214,11 +214,11 @@ export default function Home() {
       <div className="rule-line" />
       <div className="relative bg-[#0A0A0A]">
         {/* Ghost number */}
-        <div className="absolute top-0 left-6 ghost-num select-none pointer-events-none" aria-hidden>
+        <div className="hidden md:block absolute top-0 left-6 ghost-num select-none pointer-events-none" aria-hidden>
           01
         </div>
         {/* Section label row */}
-        <div className="relative z-10 flex items-center justify-between px-10 pt-8 pb-0">
+        <div className="relative z-10 flex items-center justify-between px-5 md:px-10 pt-6 md:pt-8 pb-0">
           <RevealSection variant="left">
             <EnTag>About the Creator</EnTag>
           </RevealSection>
@@ -242,20 +242,20 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           02 · CATEGORIES
       ══════════════════════════════════════════ */}
-      <section id="categories" className="relative bg-[#0A0A0A] px-10 py-24">
+      <section id="categories" className="relative bg-[#0A0A0A] px-5 md:px-10 py-16 md:py-24">
         {/* Ghost number */}
-        <div className="absolute top-0 right-8 ghost-num select-none pointer-events-none text-right" aria-hidden>
+        <div className="hidden md:block absolute top-0 right-8 ghost-num select-none pointer-events-none text-right" aria-hidden>
           02
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Section header */}
-          <div className="flex items-end justify-between mb-14">
+          <div className="flex items-end justify-between mb-10 md:mb-14">
             <div>
               <RevealSection variant="left">
                 <EnTag>Browse Categories</EnTag>
               </RevealSection>
-              <h2 className="text-4xl md:text-5xl font-black mt-3 tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-black mt-3 tracking-tight">
                 <SplitText delay={80} stagger={45}>找到你需要的资源</SplitText>
               </h2>
             </div>
@@ -323,20 +323,20 @@ export default function Home() {
           03 · FEATURED PRODUCTS
       ══════════════════════════════════════════ */}
       <div className="rule-line" />
-      <section id="products" className="relative bg-[#0A0A0A] px-10 py-24">
+      <section id="products" className="relative bg-[#0A0A0A] px-5 md:px-10 py-16 md:py-24">
         {/* Ghost number */}
-        <div className="absolute top-0 left-6 ghost-num select-none pointer-events-none" aria-hidden>
+        <div className="hidden md:block absolute top-0 left-6 ghost-num select-none pointer-events-none" aria-hidden>
           03
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Section header */}
-          <div className="flex items-end justify-between mb-14">
+          <div className="flex items-end justify-between mb-10 md:mb-14">
             <div>
               <RevealSection variant="left">
                 <EnTag>Featured Products</EnTag>
               </RevealSection>
-              <h2 className="text-4xl md:text-5xl font-black mt-3 tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-black mt-3 tracking-tight">
                 <SplitText delay={80} stagger={45}>本周热门推荐</SplitText>
               </h2>
             </div>
@@ -445,7 +445,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           FOOTER
       ══════════════════════════════════════════ */}
-      <footer className="px-10 py-16 bg-[#0A0A0A]">
+      <footer className="px-5 md:px-10 py-12 md:py-16 bg-[#0A0A0A]">
         <RevealSection variant="scale">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-between gap-10">
 
