@@ -8,6 +8,7 @@ interface Props {
   onClick?: () => void;
   strength?: number;
   as?: 'button' | 'a';
+  blob?: boolean;
 }
 
 export default function MagneticButton({
@@ -17,19 +18,32 @@ export default function MagneticButton({
   onClick,
   strength = 0.35,
   as: Tag = href ? 'a' : 'button',
+  blob = false,
 }: Props) {
-  const wrapRef = useRef<HTMLElement>(null);
+  const wrapRef  = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
+  const blobRef  = useRef<HTMLSpanElement>(null);
 
   const ease = 'cubic-bezier(0.2,0,0,1)';
 
-  const onMove = (e: MouseEvent<HTMLElement>) => {
+  const onEnter = (e: MouseEvent<HTMLElement>) => {
+    if (!blob) return;
     const el = wrapRef.current;
+    const b  = blobRef.current;
+    if (!el || !b) return;
+    const rect = el.getBoundingClientRect();
+    b.style.left = `${e.clientX - rect.left}px`;
+    b.style.top  = `${e.clientY - rect.top}px`;
+    b.classList.add('blob-active');
+  };
+
+  const onMove = (e: MouseEvent<HTMLElement>) => {
+    const el    = wrapRef.current;
     const inner = innerRef.current;
     if (!el || !inner) return;
     const rect = el.getBoundingClientRect();
-    const dx = e.clientX - rect.left - rect.width / 2;
-    const dy = e.clientY - rect.top - rect.height / 2;
+    const dx = e.clientX - rect.left - rect.width  / 2;
+    const dy = e.clientY - rect.top  - rect.height / 2;
     el.style.transform    = `translate(${dx * strength * 0.5}px, ${dy * strength * 0.5}px)`;
     inner.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
     el.style.transition    = `transform 0.12s ${ease}`;
@@ -37,13 +51,15 @@ export default function MagneticButton({
   };
 
   const onLeave = () => {
-    const el = wrapRef.current;
+    const el    = wrapRef.current;
     const inner = innerRef.current;
+    const b     = blobRef.current;
     if (!el || !inner) return;
     el.style.transform    = 'translate(0,0)';
     inner.style.transform = 'translate(0,0)';
     el.style.transition    = `transform 0.55s ${ease}`;
     inner.style.transition = `transform 0.55s ${ease}`;
+    if (b) b.classList.remove('blob-active');
   };
 
   const addRipple = (e: MouseEvent<HTMLElement>) => {
@@ -58,17 +74,21 @@ export default function MagneticButton({
     span.addEventListener('animationend', () => span.remove());
   };
 
+  const blobClass = blob ? ' relative overflow-hidden' : '';
+
   return (
     <Tag
       ref={wrapRef as React.RefObject<HTMLButtonElement & HTMLAnchorElement>}
       href={href}
       onClick={onClick}
+      onMouseEnter={onEnter}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       onMouseDown={addRipple}
-      className={className}
+      className={className + blobClass}
     >
-      <span ref={innerRef} style={{ display: 'block' }}>
+      {blob && <span ref={blobRef} className="blob-fill" aria-hidden />}
+      <span ref={innerRef} style={{ display: 'block', position: 'relative', zIndex: 1 }}>
         {children}
       </span>
     </Tag>

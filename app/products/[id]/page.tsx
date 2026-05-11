@@ -97,11 +97,11 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               {/* CTA */}
               <div className="flex flex-col gap-3 mb-10">
                 {/* Premium rotating-border buy button */}
-                <MagneticButton className="btn-premium w-full py-4 text-lg rounded-2xl font-black relative overflow-hidden">
+                <MagneticButton blob className="btn-premium w-full py-4 text-lg rounded-2xl font-black relative overflow-hidden">
                   立即购买 ¥{product.price}
                 </MagneticButton>
 
-                <MagneticButton className="btn-outline w-full py-4 text-base rounded-2xl">
+                <MagneticButton blob className="btn-outline w-full py-4 text-base rounded-2xl">
                   <span className="flex items-center justify-center gap-2">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 1l2.09 4.26L15 6.27l-3.5 3.41.83 4.82L8 12.25l-4.33 2.25.83-4.82L1 6.27l4.91-.01L8 1z"

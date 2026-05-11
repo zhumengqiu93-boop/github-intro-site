@@ -295,6 +295,33 @@ body {
 }
 
 /* ════════════════════════════════════════
+   BLOB CURSOR FILL  (vinodjangid07 style)
+════════════════════════════════════════ */
+
+.blob-fill {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform .75s cubic-bezier(0.23,1,0.32,1), opacity .35s ease;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  will-change: transform;
+}
+.blob-fill.blob-active {
+  transform: translate(-50%, -50%) scale(14);
+  opacity: 1;
+}
+.btn-outline .blob-fill { background: rgba(212,245,66,0.10); }
+.btn-premium .blob-fill { background: rgba(212,245,66,0.08); }
+
+/* Scramble text keeps layout stable during animation */
+.scramble-wrap { display: inline-block; }
+
+/* ════════════════════════════════════════
    FOCUS / RESET
 ════════════════════════════════════════ */
 

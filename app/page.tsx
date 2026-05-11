@@ -8,6 +8,7 @@ import RevealSection    from "@/app/components/RevealSection";
 import MagneticButton   from "@/app/components/MagneticButton";
 import ScrollToTop      from "@/app/components/ScrollToTop";
 import SplitText        from "@/app/components/SplitText";
+import ScrambleText     from "@/app/components/ScrambleText";
 
 /* ─── tiny decorative helpers ─────────────────────────────── */
 
@@ -15,7 +16,7 @@ function EnTag({ children }: { children: string }) {
   return (
     <span className="en-tag">
       <span className="en-tag-line" />
-      {children}
+      <ScrambleText speed={0.5}>{children}</ScrambleText>
     </span>
   );
 }
@@ -43,9 +44,9 @@ export default function Home() {
           <span className="text-base md:text-lg font-black tracking-tight">数字资料站</span>
           <span className="text-[#D4F542] text-base md:text-lg font-black inline-block
                            group-hover:rotate-12 transition-transform duration-300">。</span>
-          <span className="hidden md:inline text-[10px] text-[#444] uppercase tracking-[0.2em] ml-2 font-medium">
+          <ScrambleText as="span" className="hidden md:inline text-[10px] text-[#444] uppercase tracking-[0.2em] ml-2 font-medium" speed={0.6}>
             Design Resources
-          </span>
+          </ScrambleText>
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-sm text-[#666]">
@@ -60,7 +61,7 @@ export default function Home() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#D4F542] animate-pulse" />
             Available Now
           </span>
-          <MagneticButton href="#products" className="btn-accent px-3 py-1.5 text-xs md:px-5 md:py-2 md:text-sm">
+          <MagneticButton href="#products" blob className="btn-accent px-3 py-1.5 text-xs md:px-5 md:py-2 md:text-sm">
             浏览全部
           </MagneticButton>
         </div>
@@ -146,10 +147,10 @@ export default function Home() {
 
                 <RevealSection delay={860} variant="scale">
                   <div className="flex gap-3 flex-wrap">
-                    <MagneticButton href="#categories" className="btn-accent px-8 py-3.5 text-sm">
+                    <MagneticButton href="#categories" blob className="btn-accent px-8 py-3.5 text-sm">
                       探索资料分类 →
                     </MagneticButton>
-                    <MagneticButton href="#about" className="btn-outline px-8 py-3.5 text-sm">
+                    <MagneticButton href="#about" blob className="btn-outline px-8 py-3.5 text-sm">
                       了解作者
                     </MagneticButton>
                   </div>
@@ -481,9 +482,9 @@ export default function Home() {
               <span className="en-tag flex-row-reverse">
                 <span className="en-tag-line" />Resources
               </span>
-              <p className="text-[11px] text-[#333] font-mono">50+ items published</p>
-              <p className="text-[11px] text-[#333] font-mono">3,000+ designers</p>
-              <p className="text-[11px] text-[#333] font-mono">4.9 avg rating</p>
+              <ScrambleText as="p" className="text-[11px] text-[#333] font-mono" speed={0.55}>50+ items published</ScrambleText>
+              <ScrambleText as="p" className="text-[11px] text-[#333] font-mono" speed={0.55}>3,000+ designers</ScrambleText>
+              <ScrambleText as="p" className="text-[11px] text-[#333] font-mono" speed={0.55}>4.9 avg rating</ScrambleText>
               <div className="mt-4">
                 <ScrollToTop />
               </div>
