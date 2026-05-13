@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/app/components/LanguageContext";
 
 const noto = Noto_Sans_SC({
   variable: "--font-noto",
@@ -9,17 +10,17 @@ const noto = Noto_Sans_SC({
 });
 
 export const metadata: Metadata = {
-  title: "数字资料站 — 精选设计素材与资源",
-  description: "精选 UI 素材、模板、字体、插件等数字资料，即买即用。",
+  title: "Design Resources — Premium Digital Assets for Designers",
+  description: "Curated UI kits, templates, fonts, and illustrations for creative professionals.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-CN" className={`${noto.variable} h-full`}>
+    <html lang="en" className={`${noto.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-[#0A0A0A] text-white antialiased">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

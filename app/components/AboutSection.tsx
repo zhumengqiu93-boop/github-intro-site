@@ -2,32 +2,21 @@
 import { useEffect, useRef, useState } from 'react';
 import CountUp from './CountUp';
 import RevealSection from './RevealSection';
+import { useLang } from './LanguageContext';
+import { i18n, tr } from '@/lib/i18n';
 
-/* ── Cycling roles (flora-style stacked words) ── */
-const ROLES = ['UI/UX 设计师', '资料创作者', '独立创作者', '设计工具控'];
-
-/* ── Stats shown in the right panel ── */
-const STATS = [
-  { val: '50',   sfx: '+', label: '发布资料',  sub: 'Resources'  },
-  { val: '3000', sfx: '+', label: '付费用户',  sub: 'Customers'  },
-  { val: '4.9',  sfx: '',  label: '平均评分',  sub: 'Avg Rating' },
-  { val: '10',   sfx: '年+', label: '设计经验', sub: 'Experience' },
-];
-
-/* ── Skill tags shown in panel ── */
-const SKILLS = ['Figma', 'UI Components', 'Design System', 'Illustration', 'Prototyping', 'Motion'];
-
-function StackedWords() {
+function StackedWords({ roles }: { roles: readonly string[] }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setActive(i => (i + 1) % ROLES.length), 2400);
+    setActive(0);
+    const id = setInterval(() => setActive(i => (i + 1) % roles.length), 2400);
     return () => clearInterval(id);
-  }, []);
+  }, [roles]);
 
   return (
-    <div className="flex flex-col gap-0 select-none" aria-label={ROLES[active]}>
-      {ROLES.map((role, i) => {
+    <div className="flex flex-col gap-0 select-none" aria-label={roles[active]}>
+      {roles.map((role, i) => {
         const isActive = i === active;
         return (
           <div
@@ -79,6 +68,18 @@ function MiniChart() {
 }
 
 export default function AboutSection() {
+  const { lang } = useLang();
+  const t = (e: { en: string; zh: string }) => tr(e, lang);
+  const roles = lang === 'en' ? i18n.about.rolesEn : i18n.about.rolesZh;
+  const skills = lang === 'en' ? i18n.about.skillsEn : i18n.about.skillsZh;
+  const recentTags = lang === 'en' ? i18n.about.recentTags.en : i18n.about.recentTags.zh;
+  const stats = [
+    { val: '50',   sfx: '+',  label: t(i18n.about.statsLabels.resources),  sub: 'Resources'  },
+    { val: '3000', sfx: '+',  label: t(i18n.about.statsLabels.customers),  sub: 'Customers'  },
+    { val: '4.9',  sfx: '',   label: t(i18n.about.statsLabels.rating),     sub: 'Avg Rating' },
+    { val: '10',   sfx: lang === 'en' ? 'yr+' : '年+', label: t(i18n.about.statsLabels.experience), sub: 'Experience' },
+  ];
+
   const sectionRef = useRef<HTMLElement>(null);
   const [entered, setEntered] = useState(false);
 
@@ -118,7 +119,7 @@ export default function AboutSection() {
               style={{ opacity: entered ? 1 : 0, transform: entered ? 'none' : 'translateY(16px)', transitionDelay: '0ms' }}
             >
               <span className="w-6 h-px bg-[#444]" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#555]">About Creator</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#555]">{lang === 'en' ? 'About Creator' : '关于创作者'}</span>
             </div>
 
             {/* Stacked cycling words */}
@@ -126,7 +127,7 @@ export default function AboutSection() {
               className="mb-10 transition-all duration-700"
               style={{ opacity: entered ? 1 : 0, transform: entered ? 'none' : 'translateY(24px)', transitionDelay: '80ms' }}
             >
-              <StackedWords />
+              <StackedWords roles={roles} />
             </div>
 
             {/* Body copy */}
@@ -134,12 +135,10 @@ export default function AboutSection() {
               className="transition-all duration-700"
               style={{ opacity: entered ? 1 : 0, transform: entered ? 'none' : 'translateY(20px)', transitionDelay: '200ms' }}
             >
-              <p className="text-[#555] text-base leading-relaxed mb-3 max-w-md">
-                专注 UI/UX 设计领域 <strong className="text-[#888]">10年+</strong>，曾服务多家互联网公司。
-                把工作中积累的设计资产、模板和工具整理成资料包，帮助更多设计师提效。
-              </p>
+              <p className="text-[#555] text-base leading-relaxed mb-3 max-w-md"
+                 dangerouslySetInnerHTML={{ __html: lang === 'en' ? i18n.about.desc1En : i18n.about.desc1Zh }} />
               <p className="text-[#3A3A3A] text-sm leading-relaxed max-w-md">
-                所有资料均由本人亲自制作，注重实用性与品质，每一份都经过真实项目验证。
+                {lang === 'en' ? i18n.about.desc2En : i18n.about.desc2Zh}
               </p>
             </div>
 
@@ -148,7 +147,7 @@ export default function AboutSection() {
               className="mt-10 flex flex-wrap gap-2 transition-all duration-700"
               style={{ opacity: entered ? 1 : 0, transform: entered ? 'none' : 'translateY(16px)', transitionDelay: '320ms' }}
             >
-              {SKILLS.map((s, i) => (
+              {skills.map((s, i) => (
                 <span
                   key={s}
                   className="px-3 py-1.5 text-xs font-semibold border border-[#222] text-[#555] rounded-full tag-hover cursor-default"
@@ -184,7 +183,7 @@ export default function AboutSection() {
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#28CA42]" />
                 </div>
-                <span className="text-[11px] text-[#333] font-mono uppercase tracking-widest">creator.profile</span>
+                <span className="text-[11px] text-[#333] font-mono uppercase tracking-widest">{t(i18n.about.profileLabel)}</span>
                 <span className="w-5 h-5 rounded-full bg-[#D4F542]/10 border border-[#D4F542]/20 flex items-center justify-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4F542]" />
                 </span>
@@ -202,23 +201,23 @@ export default function AboutSection() {
                     <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#D4F542] border-2 border-[#0E0E0E]" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="font-black text-white text-sm md:text-base truncate">@design_creator</div>
-                    <div className="text-[#444] text-xs mt-0.5 font-mono truncate">UI/UX · 10年+ exp</div>
+                    <div className="font-black text-white text-sm md:text-base truncate">{t(i18n.about.handle)}</div>
+                    <div className="text-[#444] text-xs mt-0.5 font-mono truncate">{t(i18n.about.handleSub)}</div>
                   </div>
                   <div className="flex-shrink-0 px-2.5 py-1 rounded-full bg-[#D4F542]/10 border border-[#D4F542]/20
                                   text-[#D4F542] text-xs font-bold whitespace-nowrap">
-                    Available
+                    {t(i18n.about.available)}
                   </div>
                 </div>
               </div>
 
               {/* Stats grid */}
               <div className="grid grid-cols-2 border-b border-[#141414]">
-                {STATS.map((s, i) => (
+                {stats.map((s, i) => (
                   <div
                     key={s.label}
                     className={`px-4 md:px-6 py-4 md:py-5 group cursor-default hover:bg-[#141414] transition-colors duration-200
-                                ${i % 2 === 0 && i < STATS.length - 1 ? 'border-r border-[#141414]' : ''}
+                                ${i % 2 === 0 && i < stats.length - 1 ? 'border-r border-[#141414]' : ''}
                                 ${i < 2 ? 'border-b border-[#141414]' : ''}`}
                   >
                     <div className="text-2xl font-black text-white tabular-nums group-hover:text-[#D4F542] transition-colors duration-300">
@@ -233,7 +232,7 @@ export default function AboutSection() {
               {/* Activity chart */}
               <div className="px-4 md:px-6 py-4 md:py-5 border-b border-[#141414]">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] text-[#444] font-mono uppercase tracking-widest">Monthly Output</span>
+                  <span className="text-[11px] text-[#444] font-mono uppercase tracking-widest">{t(i18n.about.monthlyOutput)}</span>
                   <span className="text-[11px] text-[#D4F542] font-bold">↑ 12%</span>
                 </div>
                 <MiniChart />
@@ -241,9 +240,9 @@ export default function AboutSection() {
 
               {/* Recent tag row */}
               <div className="px-4 md:px-6 py-4 md:py-5">
-                <div className="text-[11px] text-[#333] font-mono uppercase tracking-widest mb-3">Recent Work</div>
+                <div className="text-[11px] text-[#333] font-mono uppercase tracking-widest mb-3">{t(i18n.about.recentWork)}</div>
                 <div className="flex flex-wrap gap-2">
-                  {['UI Kit Pro', 'Figma Templates', 'Design System', 'Icon Pack'].map(tag => (
+                  {recentTags.map(tag => (
                     <span key={tag}
                           className="px-3 py-1 rounded-lg bg-[#141414] border border-[#1E1E1E]
                                      text-[#555] text-xs font-medium hover:border-[#D4F542]/30
