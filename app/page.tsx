@@ -143,9 +143,21 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 3-D Word Sphere — desktop only */}
-            <RevealSection delay={500} variant="scale" className="hidden md:flex flex-col items-center justify-center">
-              <WordSphere size={340} />
+            {/* 3-D Word Sphere + stats — desktop only */}
+            <RevealSection delay={500} variant="scale" className="hidden md:flex flex-col items-center gap-6">
+              <WordSphere size={320} />
+              <div className="flex flex-col gap-4 text-right w-full">
+                {([
+                  ['50+',    '发布资料 / Resources'],
+                  ['3,000+', '付费用户 / Users'],
+                  ['4.9 ★',  '评分 / Rating'],
+                ] as [string, string][]).map(([n, l]) => (
+                  <div key={l}>
+                    <div className="text-2xl font-black text-[#D4F542] leading-none">{n}</div>
+                    <div className="text-[10px] text-[#555] uppercase tracking-[0.18em] mt-0.5">{l}</div>
+                  </div>
+                ))}
+              </div>
             </RevealSection>
           </div>
         </div>
