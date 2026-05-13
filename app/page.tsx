@@ -13,6 +13,7 @@ import MagneticButton    from "@/app/components/MagneticButton";
 import ScrollToTop       from "@/app/components/ScrollToTop";
 import SplitText         from "@/app/components/SplitText";
 import ScrambleText      from "@/app/components/ScrambleText";
+import WordSphere        from "@/app/components/WordSphere";
 
 function EnTag({ children }: { children: string }) {
   return (
@@ -142,27 +143,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Stats — desktop only */}
-            <RevealSection delay={600} variant="scale" className="hidden md:flex flex-col items-end gap-6">
-              <div className="relative w-24 h-24">
-                <svg viewBox="0 0 96 96" className="w-full h-full spin-badge">
-                  <path id="circ" d="M48,10 a38,38 0 1,1 -0.01,0" fill="none"/>
-                  <text className="fill-[#555]" style={{ fontSize: '9.5px', letterSpacing: '2.5px' }}>
-                    <textPath href="#circ">DIGITAL · DESIGN · RESOURCES ·</textPath>
-                  </text>
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[#D4F542] font-black text-lg">✦</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-4 text-right">
-                {[['50+','发布资料 / Resources'],['3,000+','付费用户 / Users'],['4.9 ★','评分 / Rating']].map(([n,l])=>(
-                  <div key={l}>
-                    <div className="text-2xl font-black text-[#D4F542] leading-none">{n}</div>
-                    <div className="text-[10px] text-[#555] uppercase tracking-[0.18em] mt-0.5">{l}</div>
-                  </div>
-                ))}
-              </div>
+            {/* 3-D Word Sphere — desktop only */}
+            <RevealSection delay={500} variant="scale" className="hidden md:flex flex-col items-center justify-center">
+              <WordSphere size={340} />
             </RevealSection>
           </div>
         </div>
