@@ -39,7 +39,7 @@ export default function ShowcaseGrid() {
   return (
     <section className="relative bg-[#080808] overflow-hidden">
       {/* ── Section header ── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-6 pt-16 md:pt-20 pb-8 flex items-end justify-between">
+      <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-10 pt-16 md:pt-20 pb-8 flex items-end justify-between">
         <div>
           <div className="flex items-center gap-3 mb-3">
             <span className="w-6 h-px bg-[#A855F7]" />
@@ -62,7 +62,7 @@ export default function ShowcaseGrid() {
       </div>
 
       {/* ── Grid ── */}
-      <div className="px-5 md:px-6 pb-8 max-w-6xl mx-auto"
+      <div className="px-5 md:px-10 pb-8 max-w-6xl mx-auto"
            style={{ height: 'calc(100vh - 180px)', minHeight: 480 }}>
         <div
           className="grid gap-2 md:gap-2.5 w-full h-full"

@@ -108,7 +108,7 @@ export default function AboutSection() {
       <div className="absolute inset-0 pointer-events-none"
            style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-16 py-14 md:py-36">
+      <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-10 py-14 md:py-36">
         <div className="grid md:grid-cols-[1fr_1fr] gap-10 md:gap-16 xl:gap-24 items-center">
 
           {/* ── LEFT COLUMN ── */}

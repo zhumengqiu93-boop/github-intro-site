@@ -158,7 +158,7 @@ export default function Home() {
 
         {/* Main content */}
         <div className="relative z-10 flex-1 flex flex-col justify-center px-5 md:px-10 py-8 md:py-12">
-          <div className="max-w-7xl mx-auto w-full grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-end">
+          <div className="max-w-6xl mx-auto w-full grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-end">
             <div>
               <RevealSection variant="left" delay={80}>
                 <div className="flex items-center gap-3 mb-5 md:mb-6">
