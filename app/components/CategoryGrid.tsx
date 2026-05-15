@@ -82,12 +82,17 @@ export default function CategoryGrid({ category, items }: Props) {
                     >
                       <div className="h-44 flex items-center justify-center text-6xl relative overflow-hidden"
                            style={{ background: product.cover }}>
-                        <span className="transition-transform duration-500 group-hover:scale-110">
-                          {product.emoji}
-                        </span>
+                        {product.image ? (
+                          <img src={product.image} alt={product.title}
+                               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        ) : (
+                          <span className="transition-transform duration-500 group-hover:scale-110">
+                            {product.emoji}
+                          </span>
+                        )}
                         {tag && (
                           <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold text-[#0A0A0A]
-                                           transition-transform duration-300 group-hover:scale-105"
+                                           transition-transform duration-300 group-hover:scale-105 z-10"
                                 style={{ background: product.tagColor }}>
                             {tag}
                           </span>

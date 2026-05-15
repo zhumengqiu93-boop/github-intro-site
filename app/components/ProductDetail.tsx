@@ -52,18 +52,25 @@ export default function ProductDetail({ product }: { product: Product }) {
               <div className="w-full aspect-square rounded-[32px] flex items-center justify-center text-[120px]
                               relative overflow-hidden border border-[#2A2A2A] group cursor-pointer"
                    style={{ background: product.cover }}>
-                <span className="relative z-10 transition-transform duration-500 group-hover:scale-110">
-                  {product.emoji}
-                </span>
+                {product.image ? (
+                  <img src={product.image} alt={product.title}
+                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                ) : (
+                  <span className="relative z-10 transition-transform duration-500 group-hover:scale-110">
+                    {product.emoji}
+                  </span>
+                )}
                 {tag && (
                   <span className="absolute top-6 right-6 px-4 py-1.5 rounded-full text-sm font-bold text-[#0A0A0A]
-                                   transition-transform duration-300 group-hover:scale-105"
+                                   transition-transform duration-300 group-hover:scale-105 z-10"
                         style={{ background: product.tagColor }}>
                     {tag}
                   </span>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/12 to-transparent
-                                translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+                {!product.image && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/12 to-transparent
+                                  translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+                )}
               </div>
 
               {/* Format badges */}

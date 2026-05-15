@@ -308,14 +308,19 @@ export default function Home() {
                         className="group relative rounded-[20px] overflow-hidden border border-[#1E1E1E] bg-[#111] block h-full">
                     <div className="h-52 flex items-center justify-center text-7xl relative overflow-hidden"
                          style={{ background: product.cover }}>
-                      <span className="relative z-10 transition-transform duration-500 group-hover:scale-110">{product.emoji}</span>
+                      {product.image ? (
+                        <img src={product.image} alt={product.title}
+                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      ) : (
+                        <span className="relative z-10 transition-transform duration-500 group-hover:scale-110">{product.emoji}</span>
+                      )}
                       {product.tag && (
-                        <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-[#0A0A0A]"
+                        <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-[#0A0A0A] z-10"
                               style={{ background: product.tagColor }}>
                           {lang === 'en' ? (product.tagEn || product.tag) : product.tag}
                         </span>
                       )}
-                      <span className="absolute bottom-3 right-4 text-[9px] text-white/30 uppercase tracking-[0.2em] font-medium">
+                      <span className="absolute bottom-3 right-4 text-[9px] text-white/30 uppercase tracking-[0.2em] font-medium z-10">
                         {product.categorySlug}
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent
