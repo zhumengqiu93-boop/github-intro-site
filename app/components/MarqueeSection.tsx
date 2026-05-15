@@ -16,11 +16,11 @@ export default function MarqueeSection() {
             {doubled.map((item, i) => (
               <span
                 key={i}
-                className="inline-flex items-center gap-3 px-7 text-[13px] font-semibold text-[#555] whitespace-nowrap
-                           hover:text-[#D4F542] transition-colors duration-200 cursor-default"
+                className="inline-flex items-center gap-3 px-7 text-[13px] font-semibold text-[#999] whitespace-nowrap
+                           hover:text-[#A855F7] transition-colors duration-200 cursor-default"
               >
                 <svg width="6" height="6" viewBox="0 0 6 6" fill="none">
-                  <circle cx="3" cy="3" r="3" fill="#D4F542" opacity="0.7" />
+                  <circle cx="3" cy="3" r="3" fill="#A855F7" opacity="0.7" />
                 </svg>
                 {item}
               </span>

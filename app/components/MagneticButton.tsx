@@ -23,10 +23,14 @@ export default function MagneticButton({
   const wrapRef  = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
   const blobRef  = useRef<HTMLSpanElement>(null);
+  const shinyRef = useRef<HTMLSpanElement>(null);
 
   const ease = 'cubic-bezier(0.2,0,0,1)';
 
   const onEnter = (e: MouseEvent<HTMLElement>) => {
+    const shiny = shinyRef.current;
+    if (shiny) shiny.classList.add('mag-shiny-active');
+
     if (!blob) return;
     const el = wrapRef.current;
     const b  = blobRef.current;
@@ -40,6 +44,7 @@ export default function MagneticButton({
   const onMove = (e: MouseEvent<HTMLElement>) => {
     const el    = wrapRef.current;
     const inner = innerRef.current;
+    const shiny = shinyRef.current;
     if (!el || !inner) return;
     const rect = el.getBoundingClientRect();
     const dx = e.clientX - rect.left - rect.width  / 2;
@@ -48,18 +53,24 @@ export default function MagneticButton({
     inner.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
     el.style.transition    = `transform 0.12s ${ease}`;
     inner.style.transition = `transform 0.12s ${ease}`;
+    if (shiny) {
+      shiny.style.setProperty('--mag-sx', `${e.clientX - rect.left}px`);
+      shiny.style.setProperty('--mag-sy', `${e.clientY - rect.top}px`);
+    }
   };
 
   const onLeave = () => {
     const el    = wrapRef.current;
     const inner = innerRef.current;
     const b     = blobRef.current;
+    const shiny = shinyRef.current;
     if (!el || !inner) return;
     el.style.transform    = 'translate(0,0)';
     inner.style.transform = 'translate(0,0)';
     el.style.transition    = `transform 0.55s ${ease}`;
     inner.style.transition = `transform 0.55s ${ease}`;
     if (b) b.classList.remove('blob-active');
+    if (shiny) shiny.classList.remove('mag-shiny-active');
   };
 
   const addRipple = (e: MouseEvent<HTMLElement>) => {
@@ -74,7 +85,7 @@ export default function MagneticButton({
     span.addEventListener('animationend', () => span.remove());
   };
 
-  const blobClass = blob ? ' relative overflow-hidden' : '';
+  const blobClass = blob ? ' relative overflow-hidden' : ' relative overflow-hidden';
 
   return (
     <Tag
@@ -88,7 +99,22 @@ export default function MagneticButton({
       className={className + blobClass}
     >
       {blob && <span ref={blobRef} className="blob-fill" aria-hidden />}
-      <span ref={innerRef} style={{ display: 'block', position: 'relative', zIndex: 1 }}>
+      {/* Shiny cursor-tracking glint overlay */}
+      <span
+        ref={shinyRef}
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          borderRadius: 'inherit',
+          background: 'radial-gradient(circle 80px at var(--mag-sx, 50%) var(--mag-sy, 50%), rgba(255,255,255,0.18) 0%, transparent 70%)',
+          opacity: 0,
+          transition: 'opacity 0.3s ease',
+          zIndex: 2,
+        }}
+      />
+      <span ref={innerRef} style={{ display: 'block', position: 'relative', zIndex: 3 }}>
         {children}
       </span>
     </Tag>

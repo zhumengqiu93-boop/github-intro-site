@@ -70,7 +70,7 @@ export default function ParticleCanvas() {
           if (d < 75) {
             const alpha = (1 - d / 75) * 0.18;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(212,245,66,${alpha})`;
+            ctx.strokeStyle = `rgba(168,85,247,${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.moveTo(ps[i].x, ps[i].y);
             ctx.lineTo(ps[j].x, ps[j].y);
@@ -86,14 +86,14 @@ export default function ParticleCanvas() {
         const glow = dist < 100 ? (1 - dist / 100) * 0.8 + 0.2 : 0.25;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212,245,66,${glow})`;
+        ctx.fillStyle = `rgba(168,85,247,${glow})`;
         ctx.fill();
       }
 
       // cursor glow ring
       if (mx > 0) {
         const g = ctx.createRadialGradient(mx, my, 0, mx, my, 80);
-        g.addColorStop(0, 'rgba(212,245,66,0.08)');
+        g.addColorStop(0, 'rgba(168,85,247,0.08)');
         g.addColorStop(1, 'transparent');
         ctx.fillStyle = g;
         ctx.beginPath();

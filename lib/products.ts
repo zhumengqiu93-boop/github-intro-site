@@ -13,6 +13,7 @@ export type Product = {
   tagColor?: string;
   cover: string;       // CSS gradient fallback
   image?: string;      // real cover image path (overrides cover + emoji when set)
+  images?: string[];   // detail page showcase gallery (multiple images)
   emoji: string;
   description: string;
   descriptionEn: string;
@@ -67,23 +68,25 @@ export const categories: Category[] = [
 export const products: Product[] = [
   {
     id: "1",
-    title: "立夏节气插画资源包",
-    subtitle: "国风节气系列 · 壁纸 贴纸 钥匙链全套",
-    subtitleEn: "Chinese Solar Term Series · Wallpapers, Stickers & Keychains",
+    title: "小满节气插画资源包",
+    subtitle: "国风节气系列 · 麦穗丰收 · 壁纸 贴纸 钥匙链全套",
+    subtitleEn: "Chinese Solar Term · Grain Buds · Wallpapers, Stickers & Keychains",
     category: "插画素材", categoryEn: "Illustrations",
     categorySlug: "illustration",
     price: 49, originalPrice: 99,
-    tag: "热卖", tagEn: "Hot", tagColor: "#D4F542",
-    cover: "linear-gradient(135deg,#1a2e1a,#0d1f0d)",
-    image: "/covers/lixia.jpg",
-    emoji: "🌿",
-    description: "以中国传统节气「立夏」为主题创作的精美国风插画资源包。细腻的水彩笔触还原了江南夏日田园的温馨氛围——青梅酒、荷叶蝴蝶、嬉戏的孩童与慵懒的花猫。资源涵盖电脑壁纸、手机壁纸、贴纸及钥匙链设计稿，全套商用可用。",
-    descriptionEn: "A gorgeous Chinese traditional illustration resource pack themed around 'Lìxià' (Start of Summer). Delicate watercolor strokes capture the warmth of a Jiangnan summer — plum wine, butterflies, playful children and a lazy cat. Includes desktop wallpapers, mobile wallpapers, sticker assets and keychain designs. Full commercial license included.",
+    tag: "热卖", tagEn: "Hot", tagColor: "#A855F7",
+    cover: "linear-gradient(135deg,#1c2a10,#0f1c08)",
+    image: "/covers/小满.png",
+    emoji: "🌾",
+    description: "以中国传统节气「小满」为主题创作的精美国风插画资源包。麦粒渐满、萤火飞舞，水彩笔触描绘了田野晨光、溪边丰收与月下萤光三幕诗意场景——嬉戏的孩童、金色麦穗与忠实的小狗，共同演绎初夏最温柔的时光。资源涵盖电脑壁纸、手机壁纸、贴纸及钥匙链设计稿，全套商用授权。",
+    descriptionEn: "A stunning Chinese traditional illustration pack themed around 'Xiǎomǎn' (Grain Buds). Watercolor scenes depict the golden fields at dawn, a riverside harvest, and firefly-lit evenings — playful children, plump wheat stalks and faithful dogs capture the poetry of early summer. Includes desktop wallpapers, mobile wallpapers, sticker assets and keychain designs. Full commercial license.",
+    images: ["/covers/小满.png"],
     includes: [
       "电脑壁纸 × 3张（1920×1080）",
       "手机壁纸 × 3张（1080×1920）",
       "贴纸素材 × 8款（PNG 透明底）",
       "钥匙链设计稿 × 4款（AI / SVG）",
+      "提示词文档（中英双语 Prompt PDF）",
       "商用授权证书",
     ],
     includesEn: [
@@ -91,6 +94,7 @@ export const products: Product[] = [
       "Mobile wallpapers × 3 (1080×1920)",
       "Sticker assets × 8 (PNG transparent)",
       "Keychain designs × 4 (AI / SVG)",
+      "Prompt document (bilingual PDF)",
       "Commercial license certificate",
     ],
     format: "PNG / AI / SVG",
@@ -135,7 +139,7 @@ export const products: Product[] = [
     category: "插画素材", categoryEn: "Illustrations",
     categorySlug: "illustration",
     price: 29,
-    tag: "热卖", tagEn: "Hot", tagColor: "#D4F542",
+    tag: "热卖", tagEn: "Hot", tagColor: "#A855F7",
     cover: "linear-gradient(135deg,#0a1a0a,#102d10)", emoji: "🖼️",
     description: "100 张现代扁平风格插画，覆盖科技、办公、生活、教育等场景。提供 PNG（透明底）和 SVG（矢量可编辑）两种格式，适合网页、PPT、App 设计。",
     descriptionEn: "100 modern flat-style illustrations covering tech, office, lifestyle, and education scenes. Available in PNG (transparent background) and SVG (vector-editable) formats — ideal for websites, presentations, and apps.",

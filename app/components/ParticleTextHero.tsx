@@ -141,7 +141,7 @@ export default function ParticleTextHero({ lines, className = '' }: Props) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * (1 + closeness * 0.8), 0, Math.PI * 2);
         ctx.fillStyle = bright
-          ? `rgba(212,245,66,${p.alpha})`
+          ? `rgba(168,85,247,${p.alpha})`
           : `rgba(255,255,255,${p.alpha * 0.55})`;
         ctx.fill();
       }

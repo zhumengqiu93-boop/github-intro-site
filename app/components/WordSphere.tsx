@@ -118,7 +118,7 @@ export default function WordSphere({ size = 340 }: Props) {
         /* Color: bright yellow for front, white mid, dim gray for back */
         const t = (p.z + R) / (R * 2); // 0 = back, 1 = front
         let color: string;
-        if (t > 0.78)       color = '#D4F542';
+        if (t > 0.78)       color = '#A855F7';
         else if (t > 0.52)  color = '#ffffff';
         else                color = '#3a3a3a';
 
@@ -137,10 +137,23 @@ export default function WordSphere({ size = 340 }: Props) {
 
     rafRef.current = requestAnimationFrame(tick);
 
+    const visObs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          rafRef.current = requestAnimationFrame(tick);
+        } else {
+          cancelAnimationFrame(rafRef.current);
+        }
+      },
+      { threshold: 0 }
+    );
+    visObs.observe(container);
+
     return () => {
       cancelAnimationFrame(rafRef.current);
       container.removeEventListener('mousemove', onMove);
       container.removeEventListener('mouseleave', onLeave);
+      visObs.disconnect();
       pts.forEach(p => p.el.remove());
     };
   }, [size]);

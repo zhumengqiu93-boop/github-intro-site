@@ -110,11 +110,11 @@ export default function FluidCursor() {
           const cy = (r + 0.5) * ch;
           const r2 = Math.min(RADIUS, cw * 0.8) * Math.min(1, density * 1.2);
 
-          // colour: white → yellow based on speed
+          // colour: white → violet (#A855F7 = 168,85,247) based on speed
           const t = Math.min(1, speed * 0.6);
-          const red   = Math.round(255 * t + 255 * (1 - t));
-          const green = Math.round(245 * t + 255 * (1 - t));
-          const blue  = Math.round(66  * t + 255 * (1 - t));
+          const red   = Math.round(168 * t + 255 * (1 - t));
+          const green = Math.round(85  * t + 255 * (1 - t));
+          const blue  = Math.round(247 * t + 255 * (1 - t));
 
           const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r2);
           grad.addColorStop(0, `rgba(${red},${green},${blue},${Math.min(0.45, density * 0.4)})`);
@@ -132,11 +132,21 @@ export default function FluidCursor() {
 
     raf = requestAnimationFrame(tick);
 
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        raf = requestAnimationFrame(tick);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseleave', onLeave);
       window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 
