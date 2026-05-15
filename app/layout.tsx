@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/app/components/LanguageContext";
+import ClientEffects from "@/app/components/ClientEffects";
 
 const noto = Noto_Sans_SC({
   variable: "--font-noto",
@@ -20,6 +21,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-full flex flex-col bg-[#0A0A0A] text-white antialiased">
         <LanguageProvider>
           {children}
+          {/* Global canvas effects — fluid cursor ripple */}
+          <ClientEffects />
         </LanguageProvider>
       </body>
     </html>

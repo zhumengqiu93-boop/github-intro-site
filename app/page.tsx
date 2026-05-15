@@ -4,7 +4,7 @@ import { categories, products } from "@/lib/products";
 import { i18n, tr } from "@/lib/i18n";
 import { useLang } from "@/app/components/LanguageContext";
 import LanguageSwitcher  from "@/app/components/LanguageSwitcher";
-import ParticleCanvas    from "@/app/components/ParticleCanvas";
+import dynamic           from "next/dynamic";
 import AboutSection      from "@/app/components/AboutSection";
 import MarqueeSection    from "@/app/components/MarqueeSection";
 import TiltCard          from "@/app/components/TiltCard";
@@ -14,6 +14,10 @@ import ScrollToTop       from "@/app/components/ScrollToTop";
 import SplitText         from "@/app/components/SplitText";
 import ScrambleText      from "@/app/components/ScrambleText";
 import WordSphere        from "@/app/components/WordSphere";
+
+/* dynamic imports — no SSR (WebGL / canvas APIs) */
+const ThreeBackground  = dynamic(() => import("@/app/components/ThreeBackground"),  { ssr: false });
+const ParticleTextHero = dynamic(() => import("@/app/components/ParticleTextHero"), { ssr: false });
 
 function EnTag({ children }: { children: string }) {
   return (
@@ -73,7 +77,8 @@ export default function Home() {
 
       {/* ══ HERO ═════════════════════════════════════════ */}
       <section className="relative min-h-screen flex flex-col overflow-hidden pt-[57px]">
-        <ParticleCanvas />
+        {/* Three.js animated wave background */}
+        <ThreeBackground />
 
         <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full
                         bg-[#D4F542]/6 blur-[130px] pointer-events-none" />
@@ -115,15 +120,25 @@ export default function Home() {
                 </div>
               </RevealSection>
 
-              <h1 className="font-black leading-[0.88] tracking-[-0.03em] mb-8 md:mb-10">
-                <div className="text-[clamp(48px,9.5vw,144px)] text-white">
-                  <SplitText delay={120} stagger={55}>{t(i18n.hero.line1)}</SplitText>
-                </div>
-                <div className="text-[clamp(48px,9.5vw,144px)] text-[#D4F542]"
-                     style={{ WebkitTextStroke: '2px #D4F542' }}>
-                  <SplitText delay={420} stagger={55}>{t(i18n.hero.line2)}</SplitText>
-                </div>
-              </h1>
+              {/* Particle text overlay + HTML headline */}
+              <div className="relative mb-8 md:mb-10">
+                {/* Particle canvas — sits on top, pointer-events off, blends with screen */}
+                <ParticleTextHero
+                  lines={[t(i18n.hero.line1), t(i18n.hero.line2)]}
+                  className="absolute inset-0 z-10 pointer-events-none"
+                />
+                {/* Semantic headline underneath — visible but subtly dimmed so particles glow */}
+                <h1 className="font-black leading-[0.88] tracking-[-0.03em] relative z-0"
+                    style={{ mixBlendMode: 'luminosity' }}>
+                  <div className="text-[clamp(48px,9.5vw,144px)] text-white">
+                    <SplitText delay={120} stagger={55}>{t(i18n.hero.line1)}</SplitText>
+                  </div>
+                  <div className="text-[clamp(48px,9.5vw,144px)] text-[#D4F542]"
+                       style={{ WebkitTextStroke: '2px #D4F542' }}>
+                    <SplitText delay={420} stagger={55}>{t(i18n.hero.line2)}</SplitText>
+                  </div>
+                </h1>
+              </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-end gap-8">
                 <RevealSection delay={720} variant="blur" className="max-w-xs">
