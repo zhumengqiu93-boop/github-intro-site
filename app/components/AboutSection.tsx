@@ -135,11 +135,8 @@ export default function AboutSection() {
               className="transition-all duration-700"
               style={{ opacity: entered ? 1 : 0, transform: entered ? 'none' : 'translateY(20px)', transitionDelay: '200ms' }}
             >
-              <p className="text-[#999] text-base leading-relaxed mb-3 max-w-md"
+              <p className="text-[#999] text-base leading-relaxed max-w-md"
                  dangerouslySetInnerHTML={{ __html: lang === 'en' ? i18n.about.desc1En : i18n.about.desc1Zh }} />
-              <p className="text-[#777] text-sm leading-relaxed max-w-md">
-                {lang === 'en' ? i18n.about.desc2En : i18n.about.desc2Zh}
-              </p>
             </div>
 
             {/* Skill tags */}
