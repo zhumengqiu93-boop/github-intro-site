@@ -23,7 +23,7 @@ function StackedWords({ roles }: { roles: readonly string[] }) {
             key={role}
             className="leading-[1.05] font-black tracking-tight cursor-default transition-all duration-700"
             style={{
-              fontSize: 'clamp(28px, 7vw, 80px)',
+              fontSize: 'clamp(22px, 3.8vw, 48px)',
               color: isActive ? '#fff' : 'transparent',
               WebkitTextStroke: isActive ? '0' : '1px rgba(255,255,255,0.13)',
               opacity: isActive ? 1 : 0.55,
